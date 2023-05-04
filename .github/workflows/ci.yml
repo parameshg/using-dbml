@@ -1,4 +1,4 @@
-name: render dbml and commit
+name: execute
 on: push
 jobs:
   date:
@@ -8,7 +8,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: render dbml to svg image
-        run: dbml-renderer -i northwind.dbml -o northwind.svg
+        run: |
+          npm install -g @softwaretechnik/dbml-renderer
+          dbml-renderer -i northwind.dbml -o northwind.svg
 
       - name: setup git config
         run: |
