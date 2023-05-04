@@ -1,0 +1,78 @@
+Project "Northwind" {
+  database_type: 'MSSQL'
+  Note: 'Northwind Data Model'
+}
+
+Table "Categories" {
+	"CategoryID" int [primary key]
+	"CategoryName" varchar(25)
+	"Description" varchar(255)
+}
+
+Table "Customers" {
+	"CustomerID" int [primary key]
+	"CustomerName" varchar(50)
+	"ContactName"varchar(50)
+	"Address" varchar(50)
+	"City" varchar(20)
+	"PostalCode" varchar(10)
+	"Country" varchar(15)
+}
+
+Table "Employees" {
+	"EmployeeID" int [primary key]
+	"LastName" varchar(15)
+	"FirstName" varchar(15)
+	"BirthDate" datetime
+	"Photo" varchar(25)
+	"Notes" varchar(1024)
+}
+
+Table "OrderDetails" {
+	"OrderDetailID" int [primary key]
+	"OrderID" int
+	"ProductID" int
+	"Quantity" int
+}
+
+Table "Orders" {
+	"OrderID" int [primary key]
+	"CustomerID" int
+	"EmployeeID" int
+	"OrderDate" datetime
+	"ShipperID" int
+}
+
+Table "Products" {
+	"ProductID" int [primary key]
+	"ProductName" varchar(50)
+	"SupplierID" int
+	"CategoryID" int
+	"Unit" varchar(25)
+	"Price" numeric
+}
+
+Table "Shippers" {
+	"ShipperID" int [primary key]
+	"ShipperName" varchar(25)
+	"Phone" varchar(15)
+}
+
+Table "Suppliers" {
+	"SupplierID" int [primary key]
+	"SupplierName" varchar(50)
+	"ContactName" varchar(50)
+	"Address" varchar(50)
+	"City" varchar(20)
+	"PostalCode" varchar(10)
+	"Country" varchar(15)
+	"Phone" varchar(15)
+}
+
+Ref: "Products"."CategoryID" > "Categories"."CategoryID"
+Ref: "Products"."SupplierID" > "Suppliers"."SupplierID"
+Ref: "OrderDetails"."ProductID" > "Products"."ProductID"
+Ref: "OrderDetails"."OrderID" > "Orders"."OrderID"
+Ref: "Orders"."CustomerID" > "Customers"."CustomerID"
+Ref: "Orders"."EmployeeID" > "Employees"."EmployeeID"
+Ref: "Orders"."ShipperID" > "Shippers"."ShipperID"

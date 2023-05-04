@@ -1,0 +1,22 @@
+name: render dbml and commit
+on: push
+jobs:
+  date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: render dbml to svg image
+        run: dbml-renderer -i northwind.dbml -o northwind.svg
+
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: commit
+        run: |
+          git add northwind.svg
+          git commit -m "dbml-renderer"
+          git push origin master
