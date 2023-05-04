@@ -69,6 +69,20 @@ Table "Suppliers" {
 	"Phone" varchar(15)
 }
 
+TableGroup "Dimensions" {
+	Orders
+    Products
+    Customers
+	Employees
+	Suppliers
+	Categories
+}
+
+TableGroup "Facts" {
+	OrderDetails
+	Shippers
+}
+
 Ref: "Products"."CategoryID" > "Categories"."CategoryID"
 Ref: "Products"."SupplierID" > "Suppliers"."SupplierID"
 Ref: "OrderDetails"."ProductID" > "Products"."ProductID"

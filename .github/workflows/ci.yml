@@ -12,7 +12,7 @@ jobs:
       - name: install dbml render
         run: npm install -g @softwaretechnik/dbml-renderer
 
-      - name: render dbml to svg image
+      - name: render dbml to svg
         run: dbml-renderer -i northwind.dbml -o northwind.svg
 
       - name: setup git config
@@ -20,8 +20,8 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
 
-      - name: commit
+      - name: git commit
         run: |
           git add northwind.svg
-          git commit -m "dbml-renderer"
+          git commit -m "dbml render"
           git push origin master
