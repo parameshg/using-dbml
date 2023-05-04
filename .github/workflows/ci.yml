@@ -1,16 +1,19 @@
 name: execute
-on: push
+on:
+  workflow_dispatch:
+
 jobs:
-  date:
+  process:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: install dbml render
+        run: npm install -g @softwaretechnik/dbml-renderer
+
       - name: render dbml to svg image
-        run: |
-          npm install -g @softwaretechnik/dbml-renderer
-          dbml-renderer -i northwind.dbml -o northwind.svg
+        run: dbml-renderer -i northwind.dbml -o northwind.svg
 
       - name: setup git config
         run: |
